@@ -1,7 +1,7 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 
-#include "SFML/System.hpp"
+#include <SFML/System.hpp>
 #include <math.h>
 #include "../include/enum.h"
 

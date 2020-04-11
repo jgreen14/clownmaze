@@ -3,7 +3,7 @@
 
 #define FLASHTIME 5
 
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 #include "../include/actor.h"
 
 class ShapeActor : public Actor
