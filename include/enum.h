@@ -1,0 +1,57 @@
+#ifndef ENUM_H_INCLUDED
+#define ENUM_H_INCLUDED
+
+#define PI 3.14159265359
+#define CIRCLE PI * 2
+#define MAXFRAMERATE 60
+#define FRAMELENGTH 16.66667
+
+#define MAXSTEPS 100
+#define MAXITEMS 100
+#define MAXACTORS 100
+#define MAXMAPS 100
+#define MAXTEXTURES 10
+#define MAXIMAGES 10
+#define MAXNPCS 100
+
+enum GAMESTATE {
+    IDLE
+};
+
+enum INPUT {
+    NOINPUT = 0,
+    CLOSEWINDOW = 1,
+    LEFT = 2,
+    RIGHT = 4,
+    FORWARD = 8,
+    BACKWARD = 16,
+    UP = 32,
+    DOWN = 64,
+    STRAFELEFT = 128,
+    STRAFERIGHT = 256,
+    MOUSETURN = 512,
+    MOUSEBUTTONLEFT = 1024,
+    NEXTMAP = 2048,
+    PREVMAP = 4096,
+    QUIT = 8192
+};
+
+enum ITEMTYPE {
+    HEALTH,
+    MONEY,
+    UNKNOWN
+};
+
+enum NPCTYPE {
+    ENEMY,
+    FRIENDLY
+};
+
+enum ACTORTYPE {
+    PLAYER,
+    ITEM,
+    NONPLAYER,
+    BULLET
+};
+
+#endif // ENUM_H_INCLUDED
