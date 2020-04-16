@@ -78,36 +78,43 @@ void Game::gameLoop()
 
         player->update(inputVal, map, elapsed, (float)input->getMouseDeltaX()/window->getSize().x);
 
+        i = 0;
         //Update distance and direction of items from player
-        for (i = 0; i < map->getActorCount(); i++)
+        while (i < map->getActorCount())
         {
             tempActor1 = map->getActor(i);
-            tempActor1->setDistancePlayer(player->getX(), player->getY());
-            tempActor1->setAnglePlayer(player->getX(), player->getY());
-            tempActor1->updateShapeWidth();
-
-            tempActor1->update(0, map, elapsed, 0);
-
-            if (tempActor1->actorType() == BULLET)
-            {
-                //Check if bullets hit anything
-                for (j = 0; j < map->getActorCount(); j++)
-                {
-                    tempActor2 = map->getActor(j);
-                    dist = distance(tempActor1, tempActor2);
-                    if (i != j && dist < 0.1)
-                    {
-                        if (tempActor2->actorType() == NONPLAYER)
-                        {
-                            ((ShapeActor*)tempActor2)->takeDamage(((Bullet*)tempActor1)->getDamage());
-                            tempActor1->deactivate();
-                        }//if
-                    }//if
-                }//for
-            }//if
 
             if (tempActor1->isActive() == false)
+            {
                 map->remove(i);
+            } // if
+            else {
+                tempActor1->setDistancePlayer(player->getX(), player->getY());
+                tempActor1->setAnglePlayer(player->getX(), player->getY());
+                tempActor1->updateShapeWidth();
+
+                tempActor1->update(0, map, elapsed, 0);
+
+                if (tempActor1->actorType() == BULLET)
+                {
+                    //Check if bullets hit anything
+                    for (j = 0; j < map->getActorCount(); j++)
+                    {
+                        tempActor2 = map->getActor(j);
+                        dist = distance(tempActor1, tempActor2);
+                        if (i != j && dist < 0.1)
+                        {
+                            if (tempActor2->actorType() == NONPLAYER)
+                            {
+                                ((ShapeActor*)tempActor2)->takeDamage(((Bullet*)tempActor1)->getDamage());
+                                tempActor1->deactivate();
+                            }//if
+                        }//if
+                    }//for
+                }//if
+                
+                ++i;
+            } // else
         }//for
 
         sortShapeActors((ShapeActor**)map->getActors(), map->getActorCount());
