@@ -51,7 +51,7 @@ float ShapeActor::getAnglePlayer()
     }//if
     else
     {
-        return PI + PI - (-1 * anglePlayer);
+        return PI + PI - (-1.0 * anglePlayer);
     }//else
 }//getAnglePlayer
 

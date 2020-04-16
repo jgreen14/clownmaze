@@ -89,7 +89,7 @@ void Actor::move(int dir, Map* map, float timeFactor)
     bool hitWall = false;
 
     if (moveDir < 0)
-        moveDir = PI + PI - (-1 * moveDir);
+        moveDir = PI + PI - (-1.0 * moveDir);
 
     realXSpeed = sin(moveDir) * realXSpeed;
     realYSpeed = cos(moveDir) * realYSpeed;
