@@ -7,7 +7,7 @@ ShapeActor::ShapeActor()
 
 ShapeActor::ShapeActor(ShapeActor* source) : Actor::Actor((Actor*)source)
 {
-    shape = source->getShape();
+    shape = new sf::RectangleShape();
     shapeHit = source->getHit();
     shapeScale = source->getScale();
     distancePlayer = source->getDistancePlayer();
@@ -15,6 +15,7 @@ ShapeActor::ShapeActor(ShapeActor* source) : Actor::Actor((Actor*)source)
     shapeWidth = source->getShapeWidth();
     rightColumn = source->getRightCol();
     leftColumn = source->getLeftCol();
+    imageIndex = source->getImageIndex();
     flashCounter = 0;
 }//ShapeActor - copy constructor
 
@@ -27,6 +28,7 @@ ShapeActor::ShapeActor(float x, float y, float z, float direction, int renderWid
     shapeWidth = 0;
     rightColumn = -1;
     leftColumn = -1;
+    imageIndex = -1;
     shapeScale = (float)renderWidth/1024.0;
     flashCounter = 0;
 }//ShapeActor
@@ -117,6 +119,16 @@ float ShapeActor::getScale()
 {
     return shapeScale;
 }//getScale
+
+int ShapeActor::getImageIndex()
+{
+    return imageIndex;
+} // getImageIndex
+
+void ShapeActor::setImageIndex(int imageIndex)
+{
+    this->imageIndex = imageIndex;
+} // setImageIndex
 
 void ShapeActor::takeDamage(int damage)// : Actor::takeDamage(damage)
 {

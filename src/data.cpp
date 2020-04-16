@@ -149,13 +149,16 @@ void Data::loadMaps()
             getline(file, line);
             while (line.compare("ENDITEMS") != 0)
             {
+                Item* tempItem;
                 splits[0] = line.find(':');
                 splits[1] = line.find(':', splits[0]+1);
 
                 index = atoi(line.substr(0,splits[0]).c_str());
                 posX = atoi(line.substr(splits[0]+1,splits[1]).c_str()) * 0.1;
                 posY = atoi(line.substr(splits[1]+1,line.length()).c_str()) * 0.1;
-                maps[mapCount]->add(new Item(items[index], posX, posY));
+                tempItem = new Item(items[index], posX, posY);
+                tempItem->getShape()->setTexture(getImage(tempItem->getImageIndex()));
+                maps[mapCount]->add(tempItem);
 
                 getline(file, line);
             }//while
@@ -163,13 +166,16 @@ void Data::loadMaps()
             getline(file, line);
             while (line.compare("ENDNPCS") != 0)
             {
+                NPC* tempNPC;
                 splits[0] = line.find(':');
                 splits[1] = line.find(':', splits[0]+1);
 
                 index = atoi(line.substr(0,splits[0]).c_str());
                 posX = atoi(line.substr(splits[0]+1,splits[1]).c_str()) * 0.1;
                 posY = atoi(line.substr(splits[1]+1,line.length()).c_str()) * 0.1;
-                maps[mapCount]->add(new NPC(npcs[index], posX, posY));
+                tempNPC = new NPC(npcs[index], posX, posY);
+                tempNPC->getShape()->setTexture(getImage(tempNPC->getImageIndex()));
+                maps[mapCount]->add(tempNPC);
 
                 getline(file, line);
             }//while
@@ -219,9 +225,9 @@ void Data::loadItems()
             type = (ITEMTYPE)atoi(line.substr(splits[1]+1,line.length()).c_str());
 
             items[itemCount] = new Item(0,0,0,0,renderWidth);
+            items[itemCount]->setImageIndex(imageIndex);
             items[itemCount]->setValue(value);
             items[itemCount]->setType(type);
-            items[itemCount]->getShape()->setTexture(getImage(imageIndex));
 
             itemCount++;
             getline(file, line);
@@ -252,9 +258,9 @@ void Data::loadNPCs()
             hostile = atoi(line.substr(splits[1]+1,line.length()).c_str());
 
             npcs[npcCount] = new NPC(0,0,0,0,renderWidth);
+            npcs[npcCount]->setImageIndex(imageIndex);
             npcs[npcCount]->setHP(hp);
             npcs[npcCount]->setPlayerHostile(hostile);
-            npcs[npcCount]->getShape()->setTexture(getImage(imageIndex));
 
             npcCount++;
             getline(file, line);

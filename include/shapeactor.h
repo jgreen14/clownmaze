@@ -30,6 +30,8 @@ class ShapeActor : public Actor
         void setDistancePlayer(float, float);
         void updateShapeWidth();
         float getShapeWidth();
+        int getImageIndex();
+        void setImageIndex(int);
         virtual void takeDamage(int);
         bool flashing();
     protected:
@@ -42,6 +44,7 @@ class ShapeActor : public Actor
         float shapeScale;
         float distancePlayer; //MOVE TO ITEM CLASS
         float anglePlayer; //MOVE TO ITEM CLASS
+        int imageIndex;
     private:
 };
 
